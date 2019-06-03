@@ -1,19 +1,11 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
+  <v-layout column justify-center align-center>
+    <v-flex xs12 sm8 md6>
       <div class="text-xs-center">
         <logo />
         <vuetify-logo />
       </div>
-      <v-card>
+      <!-- <v-card>
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template
         </v-card-title>
@@ -65,7 +57,7 @@
             Continue
           </v-btn>
         </v-card-actions>
-      </v-card>
+      </v-card>-->
     </v-flex>
   </v-layout>
 </template>
@@ -73,11 +65,33 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
+// import { GET_CURRENT_USER } from '~/apollo/queries/UserQueries'
 
 export default {
   components: {
     Logo,
     VuetifyLogo
   }
+  // async fetch({ store }) {
+  //   try {
+  //     const user = await this.$apollo
+  //       .query({
+  //         query: GET_CURRENT_USER
+  //       })
+  //       .then(({ data }) => {
+  //         // eslint-disable-next-line
+  //         console.log(data);
+
+  //         if (data && data.getCurrentUser) {
+  //           return data.getCurrentUser
+  //         }
+  //       })
+
+  //     await store.dispatch('user/setCurrentUser', user)
+  //   } catch (e) {
+  //     // eslint-disable-next-line
+  //     console.error(e);
+  //   }
+  // }
 }
 </script>

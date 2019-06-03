@@ -43,6 +43,19 @@
             <v-list-tile-title v-text="item.title" />
           </v-list-tile-content>
         </v-list-tile>
+
+        <!-- Sign Out menu item -->
+        <v-list-tile
+          to="/login/login"
+          @click="signOutUser"
+        >
+          <v-list-tile-action>
+            <v-icon>person</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Sign Out</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
 
@@ -94,6 +107,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -104,15 +119,37 @@ export default {
         {
           icon: 'person',
           title: 'Sign In',
-          to: '/login'
+          to: '/login/login'
         }
       ],
-      signedInItems: [],
+      signedInItems: [
+        {
+          icon: 'add_circle',
+          title: 'Add Event',
+          to: '/event/add'
+        }
+      ],
       miniVariant: false,
       title: 'Event Scheduler Admin',
-      isDarkThemeEnabled: true,
-      isSignedIn: false
+      isDarkThemeEnabled: true
+      // isSignedIn: false
     }
+  },
+  computed: {
+    ...mapGetters({
+      currentUser: 'user/currentUser'
+    }),
+    isSignedIn() {
+      if (this.currentUser === null || this.currentUser === undefined) {
+        return false
+      }
+      return true
+    }
+  },
+  methods: {
+    ...mapActions({
+      signOutUser: 'user/signOutUser'
+    })
   }
 }
 </script>

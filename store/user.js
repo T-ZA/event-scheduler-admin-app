@@ -3,10 +3,27 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setUser(payload) {
-    state.user = payload
+  setUser(state, payload) {
+    state.currentUser = payload
   },
-  clearUser() {
-    state.user = null
+  clearUser(state) {
+    state.currentUser = null
   }
+}
+
+export const actions = {
+  setCurrentUser({ commit }, payload) {
+    commit('setUser', payload)
+  },
+  async signOutUser({ commit }) {
+    if (window.localStorage !== 'undefined') {
+      localStorage.removeItem('apollo-token')
+    }
+    commit('clearUser')
+    await this.$apolloHelpers.onLogout()
+  }
+}
+
+export const getters = {
+  currentUser: state => state.currentUser
 }

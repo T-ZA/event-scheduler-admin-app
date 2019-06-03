@@ -1,4 +1,5 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
+import { AuthenticationError } from 'apollo-server-core'
 import pkg from './package'
 
 const APOLLO_TOKEN = 'apollo-token'
@@ -62,7 +63,7 @@ export default {
         },
         request: function (operation) {
           if (!localStorage.APOLLO_TOKEN) {
-            localStorage.setItem(APOLLO_TOKEN, '')
+            throw new AuthenticationError(`Your session has ended. Please sign in again`)
           }
 
           operation.setContext({
